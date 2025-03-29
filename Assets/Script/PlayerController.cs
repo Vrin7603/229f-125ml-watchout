@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private int currentLane = 1;      // เลนเริ่มต้น (0=ซ้าย, 1=กลาง, 2=ขวา)
     private Quaternion targetTilt;    // การเอียงตัว
 
+    public CoinManager coinManager;
+
     void Start()
     {
         targetTilt = transform.rotation; // ตั้งค่าการเอียงเริ่มต้น
@@ -23,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void MoveForward()
     {
-        transform.position += Vector3.right * speed * Time.deltaTime; // X = เดินหน้า
+        transform.position += Vector3.forward * speed * Time.deltaTime; // X = เดินหน้า
     }
 
     void HandleLaneChange()
@@ -51,11 +53,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q)) // กด Q เอียงซ้าย
         {
-            targetTilt = Quaternion.Euler(tiltAngle, 0, 0); // เปลี่ยนจาก Z เป็น X
+            targetTilt = Quaternion.Euler(-tiltAngle, 0, 0); // เปลี่ยนจาก Z เป็น X
         }
         else if (Input.GetKey(KeyCode.E)) // กด E เอียงขวา
         {
-            targetTilt = Quaternion.Euler(-tiltAngle, 0, 0);
+            targetTilt = Quaternion.Euler(tiltAngle, 0, 0);
         }
         else // ปล่อยปุ่ม กลับมาตรง
         {
@@ -64,5 +66,13 @@ public class PlayerController : MonoBehaviour
 
         // ทำ Smooth Rotation
         transform.rotation = Quaternion.Lerp(transform.rotation, targetTilt, Time.deltaTime * tiltSpeed);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            coinManager.coinCount++;
+        }
     }
 }
