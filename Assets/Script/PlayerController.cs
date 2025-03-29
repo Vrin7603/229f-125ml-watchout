@@ -25,17 +25,17 @@ public class PlayerController : MonoBehaviour
 
     void MoveForward()
     {
-        transform.position += Vector3.forward * speed * Time.deltaTime; // X = เดินหน้า
+        transform.position += Vector3.forward * speed * Time.deltaTime; // Z = เดินหน้า
     }
 
     void HandleLaneChange()
     {
-        if (Input.GetKeyDown(KeyCode.A) && currentLane > 0) // A = ไปซ้าย
+        if (Input.GetKeyDown(KeyCode.D) && currentLane > 0) // D = ไปขวา 
         {
             currentLane--;
             MoveToLane();
         }
-        else if (Input.GetKeyDown(KeyCode.D) && currentLane < 2) // D = ไปขวา
+        else if (Input.GetKeyDown(KeyCode.A) && currentLane < 2) //  A = ไปซ้าย
         {
             currentLane++;
             MoveToLane();
@@ -44,20 +44,20 @@ public class PlayerController : MonoBehaviour
 
     void MoveToLane()
     {
-        float newZ = (1 - currentLane) * laneDistance; // ซ้ายเป็น +, ขวาเป็น -
-        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, newZ);
+        float newX = (1 - currentLane) * laneDistance; // ซ้ายเป็น +, ขวาเป็น -
+        Vector3 newPosition = new Vector3(newX, transform.position.y, transform.position.z);
         transform.position = newPosition;
     }
 
     void HandleTilting()
     {
-        if (Input.GetKey(KeyCode.Q)) // กด Q เอียงซ้าย
+        if (Input.GetKey(KeyCode.E)) // กด E เอียงซ้าย
         {
-            targetTilt = Quaternion.Euler(-tiltAngle, 0, 0); // เปลี่ยนจาก Z เป็น X
+            targetTilt = Quaternion.Euler(-tiltAngle, 0, -tiltAngle); // เปลี่ยนจาก Z เป็น X
         }
-        else if (Input.GetKey(KeyCode.E)) // กด E เอียงขวา
+        else if (Input.GetKey(KeyCode.Q)) // กด Q เอียงขวา
         {
-            targetTilt = Quaternion.Euler(tiltAngle, 0, 0);
+            targetTilt = Quaternion.Euler(tiltAngle, 0, tiltAngle);
         }
         else // ปล่อยปุ่ม กลับมาตรง
         {
