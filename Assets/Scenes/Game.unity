@@ -1155,7 +1155,7 @@ MonoBehaviour:
   laneDistance: 3
   tiltAngle: 20
   tiltSpeed: 5
-  coinManager: {fileID: 0}
+  coinManager: {fileID: 1674352584}
 --- !u!54 &528434802
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2383,7 +2383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinCount: 0
-  coinText: {fileID: 0}
+  coinText: {fileID: 1050022906}
 --- !u!1001 &1678926033
 PrefabInstance:
   m_ObjectHideFlags: 0
