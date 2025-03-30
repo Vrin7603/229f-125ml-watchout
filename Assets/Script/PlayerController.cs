@@ -69,10 +69,16 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Coin"))
+        if (other.gameObject.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
             coinManager.coinCount++;
         }
+        else
+        {
+            Destroy(gameObject);
+            
+        }
+
     }
 }
