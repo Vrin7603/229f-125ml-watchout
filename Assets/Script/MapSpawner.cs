@@ -1,34 +1,46 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 public class MapSpawner : MonoBehaviour
 {
-    //public GameObject Plane; // แมพที่ใช้ *ไม่ใช้
     public GameObject Sky_big_color01;
-    public GameObject obstaclePrefab; // Obstacle ที่จะ Spawn
+    public GameObject[] obstaclePrefabs; // Obstacle ที่จะ Spawn
+    
+   
 
     public float spawnDistance = 50f; // ระยะห่างของแมพใหม่
     private float nextSpawnX = 0f; // ตำแหน่ง Spawn แมพใหม่
-    [SerializeField]public float spawnInterval; // เวลาที่ใช้ในการ Spawn 
+    [SerializeField] public float spawnInterval = 3f; // เวลาที่ใช้ในการ Spawn 
 
     private float[] lanes = { -3f, 0f, 3f }; // เลนของ Obstacle
     private float[] offsets = { -1.5f, -9.9f, 1.5f }; // ค่าขยับซ้าย-ขวา (ใช้ Q/E หลบ)
 
     void Start()
     {
-        InvokeRepeating("SpawnMap", 0f, spawnInterval); // เรียกใช้ฟังก์ชันซ้ำทุก 3 วินาที
+        StartCoroutine(SpawnLoop()); // เริ่มการ Spawn แบบไม่มีที่สิ้นสุด
+    }
+
+    IEnumerator SpawnLoop()
+    {
+        while (true) // วนลูปไปเรื่อย ๆ 
+        {
+            SpawnMap(); // เรียกให้แมพและ Object ต่าง ๆ Spawn ออกมา
+            yield return new WaitForSeconds(spawnInterval); // รอ `spawnInterval` วินาที
+        }
     }
 
     void SpawnMap()
     {
-        // สร้างแมพ
-        /*Vector3 spawnPos = new Vector3(0, -10, nextSpawnX);
-        Instantiate(Plane, spawnPos, Quaternion.identity);*/
-
+        // สร้างแมพพื้นหลัง
         Vector3 spawnPos2 = new Vector3(0, 3, nextSpawnX);
         Instantiate(Sky_big_color01, spawnPos2, Quaternion.identity);
 
-        // สร้าง Obstacle
+        // สร้าง Obstacle ตามแมพใหม่
         SpawnObstacle(nextSpawnX);
+
 
         // อัปเดตตำแหน่ง Spawn ถัดไป
         nextSpawnX += spawnDistance;
@@ -36,11 +48,15 @@ public class MapSpawner : MonoBehaviour
 
     void SpawnObstacle(float spawnZ)
     {
-       
-        float randomX = lanes[Random.Range(0, lanes.Length)]; // เลือกเลน X
-        float randomOffset = offsets[Random.Range(0, offsets.Length)]; // ขยับ Z
+        float randomX = lanes[UnityEngine.Random.Range(0, lanes.Length)];
+        float randomOffset = offsets[UnityEngine.Random.Range(0, offsets.Length)];
         Vector3 spawnPos = new Vector3(randomX, 3, spawnZ + randomOffset);
 
-        Instantiate(obstaclePrefab, spawnPos, Quaternion.identity);
+        // สุ่มเลือก Obstacle จาก Array
+        GameObject randomObstacle = obstaclePrefabs[UnityEngine.Random.Range(0, obstaclePrefabs.Length)];
+        Instantiate(randomObstacle, spawnPos, Quaternion.identity);
     }
+
+    
 }
+
