@@ -8,12 +8,15 @@ public class PlayerController : MonoBehaviour
     public float tiltSpeed = 5f;      // ความเร็วการเอียง
     private int currentLane = 1;      // เลนเริ่มต้น (0=ซ้าย, 1=กลาง, 2=ขวา)
     private Quaternion targetTilt;    // การเอียงตัว
+    public int maxHealth = 3;         // จำนวนหัวใจสูงสุด
+    private int currentHealth;        // หัวใจปัจจุบัน
 
     public CoinManager coinManager;
 
     void Start()
     {
         targetTilt = transform.rotation; // ตั้งค่าการเอียงเริ่มต้น
+        currentHealth = maxHealth; // ตั้งค่าเริ่มต้น
     }
 
     void Update()
@@ -67,18 +70,28 @@ public class PlayerController : MonoBehaviour
         // ทำ Smooth Rotation
         transform.rotation = Quaternion.Lerp(transform.rotation, targetTilt, Time.deltaTime * tiltSpeed);
     }
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Coin"))
+        if (other.CompareTag("Obstacle")) // ถ้าโดน Obstacle
         {
-            Destroy(other.gameObject);
-            coinManager.coinCount++;
+            TakeDamage(1); // ลดหัวใจ 1 ดวง
         }
-        else
-        {
-            Destroy(gameObject);
-            
-        }
-
     }
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("HP: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die(); // ถ้าหัวใจหมด
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Game Over");
+        Destroy(gameObject); // ลบตัวละครออก
+    }
+
 }
