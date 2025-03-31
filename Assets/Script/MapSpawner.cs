@@ -8,7 +8,7 @@ public class MapSpawner : MonoBehaviour
 
     public float spawnDistance = 50f; // ระยะห่างของแมพใหม่
     private float nextSpawnX = 0f; // ตำแหน่ง Spawn แมพใหม่
-    public float spawnInterval = 3f; // เวลาที่ใช้ในการ Spawn (3 วินาที)
+    [SerializeField]public float spawnInterval; // เวลาที่ใช้ในการ Spawn 
 
     private float[] lanes = { -3f, 0f, 3f }; // เลนของ Obstacle
     private float[] offsets = { -1.5f, -9.9f, 1.5f }; // ค่าขยับซ้าย-ขวา (ใช้ Q/E หลบ)
