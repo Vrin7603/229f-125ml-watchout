@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sky_big_color01: {fileID: 1217431416731007564, guid: 85d6255b63619d34ca00454861e9e649, type: 3}
+  obstaclePrefab: {fileID: 100000, guid: 52f3bf47c9c62af4588469ff668b805c, type: 3}
   spawnDistance: 20
   spawnInterval: 3
 --- !u!4 &720944779
@@ -721,7 +722,7 @@ Transform:
   m_GameObject: {fileID: 1167505273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 2.52, z: 41}
+  m_LocalPosition: {x: -5, y: 2.52, z: 41}
   m_LocalScale: {x: 0.017243395, y: 1.8839, z: 8.950787}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1053,7 +1054,7 @@ Transform:
   m_GameObject: {fileID: 1729153690}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.7, y: 2.52, z: 41}
+  m_LocalPosition: {x: 5.7, y: 2.52, z: 41}
   m_LocalScale: {x: 0.017243395, y: 1.8839, z: 8.950787}
   m_ConstrainProportionsScale: 0
   m_Children: []
