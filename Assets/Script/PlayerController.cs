@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion targetTilt;    // การเอียงตัว
     public int maxHealth = 3;         // จำนวนหัวใจสูงสุด
     private int currentHealth;        // หัวใจปัจจุบัน
+    [SerializeField]public TMP_Text Hp;
 
     public CoinManager coinManager;
 
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Hp.text = "HP: " + currentHealth.ToString();
         MoveForward();    // ตัวละครเดินหน้า
         HandleLaneChange();  // ย้ายเลน
         HandleTilting();  // เอียงตัว

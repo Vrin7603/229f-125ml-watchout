@@ -9,8 +9,8 @@ public class MapSpawner : MonoBehaviour
     public GameObject Sky_big_color01;
     public GameObject[] obstaclePrefabs; // Obstacle ที่จะ Spawn
 
-    private string[] obstacleNames = { "coin", "prop_traffic_cone", "magnet" }; //spawn
-    private int[] obstacleWeights = { 10, 5, 1 }; //coin = 10, prop traffic = 5, magnet = 1
+    private string[] obstacleNames = {"prop_traffic_cone"}; //spawn
+    private int[] obstacleWeights = { 50 }; //coin = 10, prop traffic = 5, magnet = 1
 
 
 
