@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -91,7 +93,8 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         Debug.Log("Game Over");
-        Destroy(gameObject); // ลบตัวละครออก
+        SceneManager.LoadScene("Restart");
+         
     }
 
 }

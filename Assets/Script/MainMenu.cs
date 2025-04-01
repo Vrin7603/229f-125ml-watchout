@@ -6,12 +6,27 @@ public class MainMenu : MonoBehaviour
     // Function to load the gameplay scene
     public void StartGame()
     {
-        SceneManager.LoadScene("Gameplay");  
+        SceneManager.LoadScene("Gameplay");
+       
     }
 
     
-    public void ExitGame()
+    public void StartCredit()
     {
         SceneManager.LoadScene("Credit");
     }
+
+
+
+    public void ExitGame() 
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();  
+        }
+    }
+   
+     
+
+
 }

@@ -247,7 +247,7 @@ MonoBehaviour:
   laneDistance: 3
   tiltAngle: 20
   tiltSpeed: 5
-  maxHealth: 3
+  maxHealth: 1
   coinManager: {fileID: 0}
 --- !u!4 &303029246
 Transform:
@@ -593,6 +593,7 @@ MonoBehaviour:
   - {fileID: 8050537342152234946, guid: 50e260f821baa56419af96b848301e5d, type: 3}
   - {fileID: 6954758372675618198, guid: 6a301d09debaf1e4a8d3e2657cc44a96, type: 3}
   - {fileID: 1276859104628764932, guid: c51c431c1c28a7b4082c610fc0aa0a46, type: 3}
+  - {fileID: 100000, guid: 52f3bf47c9c62af4588469ff668b805c, type: 3}
   spawnDistance: 50
   spawnInterval: 1
 --- !u!4 &720944779
